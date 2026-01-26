@@ -10,7 +10,8 @@ const emit = defineEmits<{
   (e: "sent"): void;
 }>();
 
-const { textarea, input: text } = useTextareaAutosize({
+// rename `textarea` -> `textareaEl` so TS doesn't flag it as unused
+const { textarea: textareaEl, input: text } = useTextareaAutosize({
   input: "",
   styleProp: "height",
 });
@@ -39,7 +40,7 @@ function attachImage() {
   const url = window.prompt("Paste image URL:");
   if (!url || !url.trim()) return;
   const caption = window.prompt("Optional caption (leave empty if none):") ?? undefined;
-  emit("send-image", url.trim(), caption);
+  emit("send-image", url.trim(), caption?.trim() || undefined);
   emit("sent");
 }
 </script>
@@ -49,8 +50,6 @@ function attachImage() {
     <!-- header strip above composer -->
     <div class="flex items-center justify-between px-3 py-2 border-b border-neutral-200 bg-neutral-50">
       <div class="flex items-center gap-2 min-w-0">
-
-
         <img
             src="/src/assets/whassup_green_small.png"
             alt="WhatsApp"
@@ -69,7 +68,7 @@ function attachImage() {
     <!-- textarea on top -->
     <div class="px-3 pt-2">
       <textarea
-          ref="textarea"
+          ref="textareaEl"
           v-model="text"
           rows="1"
           class="w-full min-h-9 rounded border border-neutral-200 px-3
@@ -79,7 +78,6 @@ function attachImage() {
           @keydown="onKeyDown"
       />
     </div>
-
 
     <div class="px-3 pb-2 pt-2 flex items-center justify-between gap-2">
       <button

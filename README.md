@@ -51,6 +51,17 @@ If this were production with very large histories, I would consider adding:
 2) Create a new component in `src/components/chat/messages/`
 3) Register it in `registry.ts`  
 
+## Environment variables
+
+This project currently does not require any environment-specific secrets.
+All data is mocked and the app runs fully client-side.
+
+`.env` files are intentionally excluded from the repository to follow
+standard security practices and to avoid accidentally committing secrets.
+
+If this were connected to a real backend (API keys, auth tokens, etc.),
+environment variables would be injected via the hosting platform
+(e.g. AWS Amplify / CloudFront) instead of being committed.
 
 
-P.S. Assignment took approximately 3 hours to solve.
+P.S. Implemented in approximately 3 hours, aligned with the intended scope of a take-home exercise.

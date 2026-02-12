@@ -7,6 +7,7 @@ import ChatShell from "./chat/ChatShell.vue";
 
 const store = useChatStore();
 onMounted(() => store.init());
+
 </script>
 
 <template>
